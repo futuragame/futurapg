@@ -8,15 +8,12 @@ import time
 import sys
 debugmode = True
 
-
-def rot13(s):
+def rot13(s): #rot13
     result = ""
-
     # Loop over characters.
     for v in s:
         # Convert to number with ord.
         c = ord(v)
-
         # Shift number back or forward.
         if c >= ord('a') and c <= ord('z'):
             if c > ord('m'):
@@ -28,10 +25,8 @@ def rot13(s):
                 c -= 13
             else:
                 c += 13
-
         # Append to result.
         result += chr(c)
-
     # Return transformation.
     return result
 
@@ -40,8 +35,6 @@ def gensave():
     savehash = hashlib.md5(data)
     print data
     print savehash.hexdigest()
-def readsave():
-    eq = 
 def levelup(): #levelupuj gracza
     global player
     global maxplayer
@@ -67,6 +60,8 @@ eq_sec_attack = {} #słaby atak
 #########ITEMY
 item_sword_wood_regular = {'displayname': 'Zwykły drewniany miecz', 'attackdamage': 10}
 item_food_flesh_mini = {'type': 'food', 'displayname': 'Mięso /15 hp', 'healhp': 15}
+item_food_flesh_maxi = {'type': 'food', 'displayname': 'Mięso /35 hp', 'healhp': 35}
+item_food_wine_high = {'type': 'food', 'displayname': 'Winko wysoko%%%', 'healhp': 8}
 #########ITEMY
 eq_chest = {} #zbroja :napierśnik
 eq = [{'displayname': 'batman'}, {'displayname': 'jb'}, {'displayname': 'lolcatz'}] #ekwipunek
@@ -119,10 +114,19 @@ def s_shop(): #sklep
     global eq
     global player
     print '1) Mięso 15 hp: 10$'
+    print '2) Mięso 35 hp: 22$'
+    print '3) Winko WysokoProcentoweTM'
     shop_opcja = raw_input('>')
     if shop_opcja == '1':
         player['money'] -= 10
         eq.append(item_food_flesh_mini.copy())
+    if shop_opcja == '2':
+        player['money'] -= 22
+        eq.append(item_food_flesh_maxi.copy())
+    if shop_opcja == '3':
+        player['money'] -= 31
+        print 'Pij na zdrowie'
+        eq.append(item_food_wine_high.copy())
     s_menu()
 #show eq
 def s_eq():
